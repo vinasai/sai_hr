@@ -18,7 +18,7 @@ const CompanyList = () => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/get");
+        const res = await axios.get("https://saifzc.com/api/auth/get");
         const filteredCompanies = res.data.filter(
           (company) => company.role === "company"
         );
@@ -35,7 +35,7 @@ const CompanyList = () => {
   const handleViewClick = async (company) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/job/jobs/${company._id}`
+        `https://saifzc.com/api/job/jobs/${company._id}`
       );
       setSelectedCompanyJobs(res.data);
       setSelectedCompanyName(company.name);
@@ -54,7 +54,7 @@ const CompanyList = () => {
   const confirmDelete = async () => {
     if (!companyToDelete) return;
     try {
-      await axios.delete(`http://localhost:5000/api/auth/delete/${companyToDelete}`);
+      await axios.delete(`https://saifzc.com/api/auth/delete/${companyToDelete}`);
       setCompanies(companies.filter((company) => company._id !== companyToDelete));
       setShowModal(false);
       setCompanyToDelete(null);
@@ -72,7 +72,8 @@ const CompanyList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container mx-auto p-6 max-w-6xl pt-25">
+    <div className="px-4 md:px-16 lg:pl-60 pt-30">
+    <div className="container mx-auto p-4 sm:p-6 max-w-6xl">
       <h2 className="text-4xl font-bold mb-6 text-gray-800 text-center">🏢 List of Companies</h2>
       {error && <p className="text-red-500 text-center">{error}</p>}
 
@@ -142,6 +143,7 @@ const CompanyList = () => {
         </div>
       )}
       </div>
+    </div>
 
 
       <div className="flex justify-center mt-4">

@@ -9,7 +9,7 @@ export default function Header() {
   const [employeeDropdown, setEmployeeDropdown] = useState(false);
 
   return (
-    <header className="bg-gray-900 text-white shadow-md fixed top-0 left-0 w-full z-20 h-22">
+    <header className="bg-gray-700 text-white shadow-md fixed top-0 left-0 w-full z-20 h-22">
       <div className="container mx-auto flex items-center justify-between pt-3 pl-10 pr-5">
       <div className="flex items-center space-x-3 cursor-pointer">
       <img 
@@ -25,7 +25,7 @@ export default function Header() {
         </div>
 
         <nav className="hidden md:flex space-x-8 text-lg">
-          <a href="/" className="hover:text-gray-300 transition duration-300 ease-in-out">
+          <a href="/job-portal" className="hover:text-gray-300 transition duration-300 ease-in-out">
             Home
           </a>
           <a href="about" className="hover:text-gray-300 transition duration-300 ease-in-out">
@@ -93,7 +93,7 @@ export default function Header() {
 
       {isOpen && (
         <div className="md:hidden flex flex-col space-y-4 p-4 bg-gray-900 rounded-lg shadow-lg">
-          <a href="/" className="hover:text-gray-300 transition duration-300 ease-in-out">
+          <a href="/job-portal" className="hover:text-gray-300 transition duration-300 ease-in-out">
             Home
           </a>
           <a href="/about" className="hover:text-gray-300 transition duration-300 ease-in-out">

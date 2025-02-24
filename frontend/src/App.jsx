@@ -32,9 +32,9 @@ function App() {
         <Routes>
           {/* Public Routes - No Sidebar */}
           <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<JobPortal />} />
+          <Route path="/job-portal" element={<JobPortal />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
 

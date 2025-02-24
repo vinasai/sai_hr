@@ -78,7 +78,7 @@ const AddJob = () => {
 
     try {
       const jobData = { ...formData, userId: user.id }; 
-      await axios.post("http://localhost:5000/api/job/create", jobData);
+      await axios.post("https://saifzc.com/api/job/create", jobData);
       alert("Job created successfully!");
       navigate("/job");
     } catch (err) {

@@ -22,7 +22,7 @@ const ChangePassword = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/auth/change-password/${user.id}`,
+        `https://saifzc.com/api/auth/change-password/${user.id}`,
         { oldPassword, newPassword }
       );
 

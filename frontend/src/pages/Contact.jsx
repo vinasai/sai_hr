@@ -20,7 +20,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/contact', formData);
+      await axios.post('https://saifzc.com/contact', formData);
       alert('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
@@ -33,7 +33,7 @@ const ContactUs = () => {
     <div className="bg-gray-50 py-10 sm:py-20 lg:py-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <h2 className="pt-15 text-3xl font-extrabold text-gray-900 sm:text-4xl">
             Contact Us
           </h2>
           <p className="mt-4 text-lg text-gray-600">

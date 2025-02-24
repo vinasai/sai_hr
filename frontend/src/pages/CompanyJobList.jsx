@@ -32,8 +32,8 @@ const JobList = () => {
         try {
           const endpoint =
             user.role === "admin"
-              ? "http://localhost:5000/api/job/get"
-              : `http://localhost:5000/api/job/jobs/${user.id}`;
+              ? "https://saifzc.com/api/job/get"
+              : `https://saifzc.com/api/job/jobs/${user.id}`;
           const res = await axios.get(endpoint);
           setJobs(res.data);
         } catch (error) {
@@ -89,7 +89,7 @@ const JobList = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/job/update/${currentJob._id}`,
+        `https://saifzc.com/api/job/update/${currentJob._id}`,
         updatedJob
       );
       setJobs(
@@ -114,7 +114,7 @@ const JobList = () => {
   const confirmDelete = async () => {
     if (!jobToDelete) return;
     try {
-      await axios.delete(`http://localhost:5000/api/job/delete/${jobToDelete}`);
+      await axios.delete(`https://saifzc.com/api/job/delete/${jobToDelete}`);
       setJobs(jobs.filter((job) => job._id !== jobToDelete));
       setPopUpMessage({ type: "success", message: "Job deleted successfully!" });
       setTimeout(() => setPopUpMessage(null), 3000);
@@ -130,48 +130,54 @@ const JobList = () => {
   const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
   return (
-    <div className="container mx-auto p-6 max-w-6xl pt-25">
-      <h2 className="text-4xl font-bold mb-6 text-gray-800 text-center">
+    <div className="px-4 md:px-16 lg:pl-60 pt-30">
+    <div className="container mx-auto p-4 sm:p-6 max-w-6xl">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-gray-800 text-center">
         {user?.role === "admin" ? "👜 Job List" : "👜 Your Job List"}
       </h2>
+
       {error && <p className="text-red-500 text-center">{error}</p>}
 
+      {/* Responsive Table Wrapper */}
       <div className="overflow-x-auto shadow-lg rounded-lg">
-        <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
-          <thead className="bg-gradient-to-r from-gray-700 to-indigo-500 text-white">
+        <table className="w-full bg-white shadow-lg rounded-lg overflow-hidden">
+          <thead className="bg-gradient-to-r from-gray-700 to-indigo-500 text-white text-sm md:text-base">
             <tr>
-              <th className="px-6 py-4 text-left">Job Title</th>
-              <th className="px-6 py-4 text-left">Experience</th>
-              <th className="px-6 py-4 text-left">Salary Range</th>
-              <th className="px-6 py-4 text-left">Job Type</th>
-              <th className="px-6 py-4 text-center">Actions</th>
+              <th className="px-4 sm:px-6 py-3 text-left">Job Title</th>
+              <th className="px-4 sm:px-6 py-3 text-left">Experience</th>
+              <th className="px-4 sm:px-6 py-3 text-left">Salary Range</th>
+              <th className="px-4 sm:px-6 py-3 text-left">Job Type</th>
+              <th className="px-4 sm:px-6 py-3 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody className="text-gray-700">
+
+          <tbody className="text-gray-700 text-sm md:text-base">
             {currentJobs.length === 0 ? (
               <tr>
-                <td colSpan="5" className="text-center py-6 text-gray-500">No jobs found.</td>
+                <td colSpan="5" className="text-center py-6 text-gray-500">
+                  No jobs found.
+                </td>
               </tr>
             ) : (
-              [...currentJobs]
-              .reverse()
-              .map((job) => (
+              [...currentJobs].reverse().map((job) => (
                 <tr key={job._id} className="border-b hover:bg-gray-100 transition duration-300">
-                  <td className="px-6 py-4">{job.jobTitle}</td>
-                  <td className="px-6 py-4">{job.jobDescription.slice(0, 10)}...</td>
-                  <td className="px-6 py-4 text-green-600">${job.salaryMinRange} - ${job.salaryMaxRange}</td>
-                  <td className="px-6 py-4 text-green-600">{job.jobType}</td>
-                  <td className="px-6 py-4 flex justify-center space-x-3">
+                  <td className="px-4 sm:px-6 py-3">{job.jobTitle}</td>
+                  <td className="px-4 sm:px-6 py-3">{job.jobDescription.slice(0, 10)}...</td>
+                  <td className="px-4 sm:px-6 py-3 text-green-600">
+                    ${job.salaryMinRange} - ${job.salaryMaxRange}
+                  </td>
+                  <td className="px-4 sm:px-6 py-3 text-green-600">{job.jobType}</td>
+                  <td className="px-4 sm:px-6 py-3 flex flex-wrap justify-center gap-2">
                     <button
                       onClick={() => handleUpdateClick(job)}
-                      className="bg-gray-500 hover:bg-gray-700 text-white px-3 py-1 rounded"
+                      className="bg-gray-500 hover:bg-gray-700 text-white px-3 py-1 rounded text-xs sm:text-sm"
                     >
                       Update
                     </button>
 
                     <button
                       onClick={() => handleRemoveClick(job._id)}
-                      className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded"
+                      className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded text-xs sm:text-sm"
                     >
                       Delete
                     </button>
@@ -181,31 +187,32 @@ const JobList = () => {
             )}
           </tbody>
         </table>
+      </div>
 
-        {/* Modal Popup */}
-        {showDeleteModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm">
-              <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
-              <p>Are you sure you want to remove this company?</p>
-              <div className="flex justify-end mt-4 space-x-2">
-                <button
-                  onClick={() => setShowDeleteModal(false)}
-                  className="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={confirmDelete}
-                  className="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded"
-                >
-                  Confirm
-                </button>
-              </div>
+      {/* Modal Popup */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center px-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
+            <p>Are you sure you want to remove this company?</p>
+            <div className="flex justify-end mt-4 space-x-2">
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                className="px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded"
+              >
+                Confirm
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
 
       {/* Pagination Controls */}
       {totalPages > 1 && (

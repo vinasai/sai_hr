@@ -22,7 +22,7 @@ const JobPortal = () => {
 
   const fetchJob = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/job/get");
+      const response = await axios.get("https://saifzc.com/api/job/get");
       setJobs(response.data);
     } catch (error) {
       console.error("Error fetching jobs:", error);
@@ -31,7 +31,7 @@ const JobPortal = () => {
 
   const viewJob = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/job/get");
+      const response = await axios.get("https://saifzc.com/api/job/get");
       setJobs(response.data);
       setShowJobs(response.data.length > 0);
       setCurrentPage(1);
@@ -42,7 +42,7 @@ const JobPortal = () => {
 
   const fetchJobCount = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/job/count");
+      const response = await axios.get("https://saifzc.com/api/job/count");
       setTotalJobs(response.data.totalJobs);
     } catch (error) {
       console.error("Error fetching job count:", error);
@@ -51,7 +51,7 @@ const JobPortal = () => {
 
   const fetchCompanies = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/auth/get");
+      const response = await axios.get("https://saifzc.com/api/auth/get");
       setCompany(response.data);
     } catch (error) {
       console.error("Error fetching companies:", error);

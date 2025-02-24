@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   const fetchJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/job/get");
+      const response = await axios.get("https://saifzc.com/api/job/get");
       setJobs(response.data);
     } catch (error) {
       console.error("Error fetching jobs:", error);
@@ -28,7 +28,7 @@ const Dashboard = () => {
 
   const fetchCompanies = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/auth/get");
+      const response = await axios.get("https://saifzc.com/api/auth/get");
       setCompanies(response.data);
     } catch (error) {
       console.error("Error fetching companies:", error);
@@ -50,11 +50,12 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mx-auto p-25 max-w-6xl">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">📊 Dashboard</h2>
+    <div className="container mx-auto p-4 lg:p-35 max-w-6xl ">
+      {/* <div className="container mx-auto p-4 lg:p-25 max-w-6xl"></div> */}
+      <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center flex justify-center">📊 Dashboard</h2>
       {error && <p className="text-red-500 text-center">{error}</p>}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+  
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 flex justify-center">
         <div className="flex items-center bg-white p-6 rounded-lg shadow-lg">
           <div className="p-4 bg-green-500 text-white rounded-full">
             <Briefcase size={32} />
@@ -64,7 +65,7 @@ const Dashboard = () => {
             <p className="text-2xl font-bold text-gray-900">{jobs.length}</p>
           </div>
         </div>
-
+  
         <div className="flex items-center bg-white p-6 rounded-lg shadow-lg">
           <div className="p-4 bg-blue-500 text-white rounded-full">
             <Building2 size={32} />
@@ -75,16 +76,16 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center bg-white p-6 rounded-lg shadow-lg w-[400px] h-[600px] mx-auto">
-      <h3 className="text-2xl font-semibold text-center mb-4">📈 Job & Company Statistics</h3>
-      <div className="w-[250px] h-[400px]">
-        <Bar data={data} options={{ responsive: true, maintainAspectRatio: false }} />
+  
+      <div className="flex flex-col justify-center items-center bg-white p-6 rounded-lg shadow-lg w-full sm:w-[450px] lg:w-[600px] mx-auto">
+        <h3 className="text-2xl font-semibold text-center mb-4">📈 Job & Company Statistics</h3>
+        <div className="w-full sm:w-[250px] lg:w-[300px] h-[400px]">
+          <Bar data={data} options={{ responsive: true, maintainAspectRatio: false }} />
+        </div>
       </div>
     </div>
-
-
-    </div>
   );
+  
 };
 
 export default Dashboard;

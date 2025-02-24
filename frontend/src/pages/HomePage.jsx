@@ -33,7 +33,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="group relative cursor-pointer" onClick={() => handleClick('/')}>
+          <div className="group relative cursor-pointer" onClick={() => handleClick('/job-portal')}>
             <div className="bg-gray-800 rounded-lg shadow-xl overflow-hidden group-hover:scale-105 transition-transform duration-300">
               <img
                 src={img1} 
