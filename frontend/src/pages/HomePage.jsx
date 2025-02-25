@@ -17,9 +17,7 @@ const HomePage = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center background-animation"></div>
 
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-12">Welcome to My HomePage</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-20">
         <div className="group relative cursor-pointer" onClick={() => handleClick('#')}>
             <div className="bg-gray-800 rounded-lg shadow-xl overflow-hidden group-hover:scale-105 transition-transform duration-300">
               <img
