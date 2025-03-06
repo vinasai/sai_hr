@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import backImg from "../assets/HRbg1.jpg";
 import { useNavigate } from "react-router-dom";
+import backImg from "../assets/jobseeker.png"
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -64,15 +64,13 @@ export default function Register() {
   };
 
   return (
-<div className="flex items-center justify-center min-h-screen" style={{
+<div className="flex items-center lg:pt-12 lg:pl-150 justify-center min-h-screen" style={{
   backgroundImage: `url(${backImg})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
-  paddingTop: '8rem',
-  padding:'2rem'
 }}>
-  <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg max-w-lg sm:max-w-md w-full">
+  <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg max-w-lg sm:max-w-md w-full border border-gray-500">
     <h2 className="text-3xl font-bold text-center text-gray-700 mb-6">Create an Account</h2>
     <form onSubmit={handleSubmit}>
       <div className="mb-4">

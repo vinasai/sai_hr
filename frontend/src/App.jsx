@@ -8,7 +8,7 @@ import JobPortal from './pages/JobPortal';
 import CompanyJobList from './pages/CompanyJobList';
 import AboutUs from './pages/AboutUs';
 import Contact from "./pages/Contact";
-import CompanyList from "./pages/CompanyList";
+// import CompanyList from "./pages/CompanyList";
 import ChangePassword from "./pages/ChangePassword";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
@@ -91,7 +91,7 @@ function App() {
               />
             }
           />
-          <Route
+          {/* <Route
             path="/company-list"
             element={
               <ProtectedRoute
@@ -103,7 +103,7 @@ function App() {
                 allowedRoles={["admin"]}
               />
             }
-          />
+          /> */}
         </Routes>
       </AuthProvider>
     </Router>

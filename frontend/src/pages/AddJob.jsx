@@ -1,22 +1,30 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import backImg from "../assets/HRbg1.jpg";
+import backImg from "../assets/jobseeker.png";
 import { AuthContext } from "../Context/AuthContext";
 
 const AddJob = () => {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    companyName: "",
     jobTitle: "",
-    companyAddress: "",
+    jobDescription: "",
     salaryMinRange: "",
     salaryMaxRange: "",
-    experinceYear: "",
-    jobDescription: "",
-    email: "",
-    jobType: "",
+    experienceYear: "",
     city: "",
+    ageLimitMin: "",
+    ageLimitMax: "",
+    workingHours: "",
+    overtime: "",
+    education: "",
+    drivingLicence: "",
+    accommodation: "",
+    transportation: "",
+    food: "",
+    specialTraining: "",
+    specialSkill: "",
+    specialNotes: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -28,20 +36,13 @@ const AddJob = () => {
 
   const validate = () => {
     const newErrors = {};
-
-    if (!formData.companyName) newErrors.companyName = "Company Name is required.";
     if (!formData.jobTitle) newErrors.jobTitle = "Job Title is required.";
     if (!formData.jobDescription.trim()) {
       newErrors.jobDescription = "Job Description is required.";
     } else if (formData.jobDescription.length < 3) {
-      newErrors.jobDescription = "Job Description must be at least 3 characters";
-    }
-    if (!formData.companyAddress) newErrors.companyAddress = "Company Address is required.";
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Valid email is required.";
+      newErrors.jobDescription = "Job Description must be at least 3 characters.";
     }
     if (!formData.city) newErrors.city = "City is required.";
-    if (!formData.jobType) newErrors.jobType = "Job Type is required.";
     if (!formData.salaryMinRange) newErrors.salaryMinRange = "Min Salary is required.";
     if (!formData.salaryMaxRange) newErrors.salaryMaxRange = "Max Salary is required.";
     if (parseFloat(formData.salaryMinRange) >= parseFloat(formData.salaryMaxRange)) {
@@ -61,6 +62,7 @@ const AddJob = () => {
       navigate("/login");
       return;
     }
+
     try {
       const jobData = { ...formData, userId: user.id };
       await axios.post("https://saifzc.com/api/job/create", jobData);
@@ -72,82 +74,186 @@ const AddJob = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen pt-25 px-4 sm:px-8" style={{
-      backgroundImage: `url(${backImg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'
-    }}>
-      <div className="bg-white p-6 sm:p-10 rounded-2xl shadow-lg w-full max-w-3xl">
+    <div
+      className="flex items-center justify-center min-h-screen px-4 sm:px-8 bg-cover bg-center pt-25"
+      style={{ backgroundImage: `url(${backImg})` }}
+    >
+      <div className="bg-white p-6 sm:p-10 rounded-2xl shadow-lg w-full max-w-4xl border border-gray-300">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-700 mb-6">Post a Job</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {[
-            { name: "companyName", placeholder: "Company Name" },
-            { name: "jobTitle", placeholder: "Job Title" },
-            { name: "companyAddress", placeholder: "Company Address" },
-            { name: "email", placeholder: "Contact Email", type: "email" },
-            { name: "city", placeholder: "City" },
-          ].map(({ name, placeholder, type = "text" }) => (
-            <div key={name}>
-              <input
-                type={type}
+          
+          {/* Job Title */}
+          <input
+            type="text"
+            name="jobTitle"
+            placeholder="Job Title"
+            className="input-field border border-gray-300 rounded-md p-2 w-full"
+            onChange={handleChange}
+            value={formData.jobTitle}
+            required
+          />
+          {errors.jobTitle && <p className="text-red-500 text-sm">{errors.jobTitle}</p>}
+  
+          {/* Job Description */}
+          <textarea
+            name="jobDescription"
+            placeholder="Job Description"
+            className="input-field border border-gray-300 rounded-md p-2 w-full"
+            rows="3"
+            onChange={handleChange}
+            value={formData.jobDescription}
+            required
+          />
+          {errors.jobDescription && <p className="text-red-500 text-sm">{errors.jobDescription}</p>}
+  
+          {/* City */}
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            className="input-field border border-gray-300 rounded-md p-2 w-full"
+            onChange={handleChange}
+            value={formData.city}
+            required
+          />
+          {errors.city && <p className="text-red-500 text-sm">{errors.city}</p>}
+  
+          <input
+            type="text"
+            name="education"
+            placeholder="Education"
+            className="input-field border border-gray-300 rounded-md p-2 w-full"
+            onChange={handleChange}
+            value={formData.education}
+          />
+  
+          {/* Salary Range */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              type="number"
+              name="salaryMinRange"
+              placeholder="Min Salary (ADE)"
+              className="input-field border border-gray-300 rounded-md p-2"
+              onChange={handleChange}
+              value={formData.salaryMinRange}
+              min="0"
+              required
+            />
+              {errors.salaryMinRange && <p className="text-red-500 text-sm">{errors.salaryMinRange}</p>}
+              {errors.salaryRange && <p className="text-red-500 text-sm">{errors.salaryRange}</p>}
+            <input
+              type="number"
+              name="salaryMaxRange"
+              placeholder="Max Salary (ADE)"
+              className="input-field border border-gray-300 rounded-md p-2"
+              onChange={handleChange}
+              value={formData.salaryMaxRange}
+              min="0"
+              required
+            />
+             {errors.salaryMaxRange && <p className="text-red-500 text-sm">{errors.salaryMaxRange}</p>}
+             {errors.salaryRange && <p className="text-red-500 text-sm">{errors.salaryRange}</p>}
+          </div>
+  
+          {/* Age Limit & Experience */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <input
+              type="number"
+              name="ageLimitMin"
+              placeholder="Min Age"
+              className="input-field border border-gray-300 rounded-md p-2"
+              onChange={handleChange}
+              value={formData.ageLimitMin}
+              min="0"
+            />
+            <input
+              type="number"
+              name="ageLimitMax"
+              placeholder="Max Age"
+              className="input-field border border-gray-300 rounded-md p-2"
+              onChange={handleChange}
+              value={formData.ageLimitMax}
+              min="0"
+            />
+            <input
+              type="number"
+              name="experienceYear"
+              placeholder="Experience (Years)"
+              className="input-field border border-gray-300 rounded-md p-2"
+              onChange={handleChange}
+              value={formData.experienceYear}
+              min="0"
+            />
+            <input
+              type="text"
+              name="workingHours"
+              placeholder="Working Hours"
+              className="input-field border border-gray-300 rounded-md p-2"
+              onChange={handleChange}
+              value={formData.workingHours}
+            />
+          </div>
+  
+          {/* Overtime */}
+          <select
+            name="overtime"
+            className="input-field border border-gray-300 rounded-md p-2 w-full"
+            onChange={handleChange}
+            value={formData.overtime}
+          >
+            <option value="">Overtime</option>
+            <option value="Mandatory">Mandatory</option>
+            <option value="Optional">Optional</option>
+            <option value="Depends">Depends</option>
+          </select>
+  
+          {/* Additional Select Options */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              { name: "drivingLicence", label: "Driving Licence", options: ["Required", "Not Required"] },
+              { name: "accommodation", label: "Accommodation", options: ["Included", "Not Included"] },
+              { name: "transportation", label: "Transportation", options: ["Included", "Not Included"] },
+              { name: "food", label: "Food", options: ["Included", "Not Included"] },
+              { name: "specialTraining", label: "Special Training", options: ["Yes", "No"] },
+              { name: "specialSkill", label: "Special Skill", options: ["Yes", "No"] },
+            ].map(({ name, label, options }) => (
+              <select
+                key={name}
                 name={name}
-                placeholder={placeholder}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                className="input-field border border-gray-300 rounded-md p-2"
                 onChange={handleChange}
                 value={formData[name]}
-                required
-              />
-              {errors[name] && <p className="text-red-500 text-sm">{errors[name]}</p>}
-            </div>
-          ))}
-          <div>
-            <select
-              name="jobType"
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              onChange={handleChange}
-              value={formData.jobType}
-              required
-            >
-              <option value="">Select Job Type</option>
-              {["Full Time", "Part Time", "Freelance", "Internship"].map(type => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
-            {errors.jobType && <p className="text-red-500 text-sm">{errors.jobType}</p>}
-          </div>
-          <div>
-            <textarea
-              name="jobDescription"
-              placeholder="Job Description"
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              rows="4"
-              onChange={handleChange}
-              value={formData.jobDescription}
-              required
-            ></textarea>
-            {errors.jobDescription && <p className="text-red-500 text-sm">{errors.jobDescription}</p>}
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {["salaryMinRange", "salaryMaxRange"].map(name => (
-              <div key={name}>
-                <input
-                  type="number"
-                  name={name}
-                  placeholder={name === "salaryMinRange" ? "Min Salary (USD)" : "Max Salary (USD)"}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                  onChange={handleChange}
-                  value={formData[name]}
-                  required
-                />
-                {errors[name] && <p className="text-red-500 text-sm">{errors[name]}</p>}
-              </div>
+              >
+                <option value="">{label}</option>
+                {options.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
             ))}
           </div>
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+  
+          {/* Special Notes */}
+          <textarea
+            name="specialNotes"
+            placeholder="Special Notes"
+            className="input-field border border-gray-300 rounded-md p-2 w-full"
+            rows="2"
+            onChange={handleChange}
+            value={formData.specialNotes}
+          />
+  
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+          >
             Post Job
           </button>
         </form>
       </div>
     </div>
   );
+  
 };
 
 export default AddJob;

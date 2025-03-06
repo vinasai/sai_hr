@@ -27,17 +27,17 @@ const SideBar = () => {
                             <Briefcase size={20} /> <span>Dashboard</span>
                         </a>
                     )}
-
-                    {user?.role !== "company" && (
+                    {/* {user?.role !== "company" && (
                         <a href="/company-list" className="flex items-center space-x-2 hover:text-yellow-300">
                             <Building size={20} /> <span>Company</span>
                         </a>
-                    )}
-
+                    )} */}
                     <a href="/job" className="flex items-center space-x-2 hover:text-yellow-300">
                         <Briefcase size={20} /> <span>Jobs</span>
                     </a>
-
+                    <a href="/addjob" className="flex items-center space-x-2 hover:text-yellow-300">
+                            <Briefcase size={20} /> <span>Add Job</span>
+                    </a>
                     {user?.role !== "admin" && (
                         <a href="/addjob" className="flex items-center space-x-2 hover:text-yellow-300">
                             <Briefcase size={20} /> <span>Add Job</span>

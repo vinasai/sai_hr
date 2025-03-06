@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
-import backImg from "../assets/HRbg1.jpg"
+import backImg from "../assets/jobseeker.png"
 import Header from "../components/Header";
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -34,14 +34,14 @@ export default function Login() {
 
   return (
     <>
-<div className="flex items-center justify-center min-h-screen" style={{
+<div className="flex items-center lg:pl-150 justify-center min-h-screen " style={{
   backgroundImage: `url(${backImg})`,
   backgroundSize: 'cover', 
   backgroundPosition: 'center', 
   backgroundRepeat: 'no-repeat' 
 }}
 >
-      <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full">
+      <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full border border-gray-500">
         <h2 className="text-3xl font-bold text-center text-gray-700 mb-6">Welcome Back</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

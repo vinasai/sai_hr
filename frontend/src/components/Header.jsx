@@ -1,15 +1,14 @@
 import { useState, useContext } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { AuthContext } from "../Context/AuthContext";
-import logo from "../assets/sailogo.jpg"
+import logo from "../assets/Sai_logo.jpg"
 
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [employeeDropdown, setEmployeeDropdown] = useState(false);
 
   return (
-    <header className="bg-gray-700 text-white shadow-md fixed top-0 left-0 w-full z-20 h-22">
+    <header className="bg-gray-900 text-white shadow-md fixed top-0 left-0 w-full z-20 h-22">
       <div className="container mx-auto flex items-center justify-between pt-3 pl-10 pr-5">
       <div className="flex items-center space-x-3 cursor-pointer">
       <img 
@@ -40,48 +39,17 @@ export default function Header() {
             <div className="relative">
               <button
                 className="hover:text-gray-300 transition duration-300 ease-in-out flex items-center"
-                onClick={() => setEmployeeDropdown(!employeeDropdown)}
-              >
-                Employee <ChevronDown size={18} className="ml-1" />
+              ><a href="dashboard">Dashboard</a>
               </button>
-
-              {employeeDropdown && (
-                <div className="absolute left-0 mt-2 w-40 bg-gray-900 text-white shadow-md rounded-md">
-                  <a
-                    href="/job"
-                    className="block px-4 py-2 hover:text-gray-200 transition duration-300 ease-in-out"
-                  >
-                    Panel
-                  </a>
-                </div>
-              )}
             </div>
             </>
           ) : (
             <div className="relative">
               <button
                 className="hover:text-gray-300 transition duration-300 ease-in-out flex items-center"
-                onClick={() => setEmployeeDropdown(!employeeDropdown)}
               >
-                Employee <ChevronDown size={18} className="ml-1" />
+               <a href="dashboard">Login</a>
               </button>
-
-              {employeeDropdown && (
-                <div className="absolute left-0 mt-2 w-40 bg-gray-900 text-white shadow-md rounded-md">
-                  <a
-                    href="/login"
-                    className="block px-4 py-2 hover:text-gray-200 transition duration-300 ease-in-out"
-                  >
-                    Login
-                  </a>
-                  <a
-                    href="/register"
-                    className="block px-4 py-2 hover:text-gray-200 transition duration-300 ease-in-out"
-                  >
-                    Register
-                  </a>
-                </div>
-              )}
             </div>
           )}
         </nav>
@@ -108,48 +76,28 @@ export default function Header() {
             <div className="relative">
               <button
                 className="hover:text-gray-300 transition duration-300 ease-in-out flex items-center"
-                onClick={() => setEmployeeDropdown(!employeeDropdown)}
               >
-                Employee <ChevronDown size={18} className="ml-1" />
-              </button>
-
-              {employeeDropdown && (
-                <div className="absolute left-0 mt-2 w-40 bg-gray-900 text-white shadow-md rounded-md">
-                  <a
-                    href="/job"
-                    className="block px-4 py-2 hover:text-gray-200 transition duration-300 ease-in-out"
+                               <a
+                    href="/dashboard"
+                    className="block hover:text-gray-200 transition duration-300 ease-in-out"
                   >
-                    Panel
+                    Dashboard
                   </a>
-                </div>
-              )}
+              </button>
             </div>
             </>
           ) : (
             <div className="relative">
               <button
                 className="hover:text-gray-300 transition duration-300 ease-in-out flex items-center"
-                onClick={() => setEmployeeDropdown(!employeeDropdown)}
               >
-                Employee <ChevronDown size={18} className="ml-1" />
-              </button>
-
-              {employeeDropdown && (
-                <div className="absolute left-0 mt-2 w-40 bg-gray-900 text-white shadow-md rounded-md">
-                  <a
+               <a
                     href="/login"
-                    className="block px-4 py-2 hover:text-gray-200 transition duration-300 ease-in-out"
+                    className="block hover:text-gray-200 transition duration-300 ease-in-out"
                   >
                     Login
                   </a>
-                  <a
-                    href="/register"
-                    className="block px-4 py-2 hover:text-gray-200 transition duration-300 ease-in-out"
-                  >
-                    Register
-                  </a>
-                </div>
-              )}
+              </button>
             </div>
           )}
         </div>
