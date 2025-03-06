@@ -1,16 +1,26 @@
 const mongoose = require('mongoose');
 
 const jobSchema = new mongoose.Schema({
-  companyName: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to User
   jobTitle: { type: String, required: true },
-  companyAddress: { type: String, required: true },
-  salaryMinRange: { type: Number, default: 0 },
-  salaryMaxRange: { type: Number, default: 0 },
-  city: { type: String, required: true },
-  jobType: { type: String, required: true },
   jobDescription: { type: String, required: true },
-  email: { type: String, required: true },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', required: true } // Reference to Company model
+  salaryMinRange: { type: Number, required: true, min: 0 },
+  salaryMaxRange: { type: Number, required: true, min: 0 },
+  experienceYear: { type: Number, required: true, min: 0 },
+  city: { type: String, required: true },
+  ageLimitMin: { type: Number, min: 0 },
+  ageLimitMax: { type: Number, min: 0 },
+  workingHours: { type: String },
+  overtime: { type: String, enum: ['Mandatory', 'Optional', 'Depends'], default: 'Depends' },
+  education: { type: String },
+  drivingLicence: { type: String, enum: ['Required', 'Not Required'], default: 'Not Required' },
+  accommodation: { type: String, enum: ['Included', 'Not Included'], default: 'Not Included' },
+  transportation: { type: String, enum: ['Included', 'Not Included'], default: 'Not Included' },
+  food: { type: String, enum: ['Included', 'Not Included'], default: 'Not Included' },
+  specialTraining: { type: String, enum: ['Yes', 'No'], default: 'No' },
+  specialSkill: { type: String, enum: ['Yes', 'No'], default: 'No' },
+  specialNotes: { type: String },
+
 });
 
 const Job = mongoose.model('Job', jobSchema);

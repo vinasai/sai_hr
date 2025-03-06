@@ -1,17 +1,39 @@
 const Job = require('../models/Job');
 
-exports.createJob = async(req,res)=>{
-    try{
-        const{companyName,jobTitle, companyAddress, salaryMinRange, salaryMaxRange, experinceYear,jobDescription,userId,email,jobType,city} = req.body
-        
-        const job = new Job({ companyName, jobTitle, companyAddress, salaryMinRange, salaryMaxRange, experinceYear, jobDescription,userId,email,jobType,city});
-        await job.save();
-        res.status(201).json({ msg: "Job created successfully" });
+exports.createJob = async (req, res) => {
+  try {
+    const {
+      jobTitle, salaryMinRange, salaryMaxRange, 
+      experienceYear, jobDescription, userId, city, 
+      ageLimitMin, ageLimitMax, workingHours, overtime, education, 
+      drivingLicence, accommodation, transportation, food, specialTraining, 
+      specialSkill, specialNotes
+    } = req.body;
 
-    }catch(error){
-        res.status(500).json({ error: error.message });
+    // Validation
+    if ( !jobTitle ||  !jobDescription || !userId  || !city) {
+      return res.status(400).json({ error: "All required fields must be provided" });
     }
-}
+    
+    if (salaryMinRange >= salaryMaxRange) {
+      return res.status(400).json({ error: "Max Salary must be greater than Min Salary" });
+    }
+
+    const job = new Job({
+      jobTitle, salaryMinRange, salaryMaxRange, 
+      experienceYear, jobDescription, userId, city, 
+      ageLimitMin, ageLimitMax, workingHours, overtime, education, 
+      drivingLicence, accommodation, transportation, food, specialTraining, 
+      specialSkill, specialNotes
+    });
+
+    await job.save();
+    res.status(201).json({ message: "Job created successfully", job });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 exports.getJob = async(req,res)=>{
     try {
@@ -45,10 +67,18 @@ exports.getJobId = async(req,res)=>{
 
 exports.updateJob = async(req,res)=>{
     try{
-        const{companyName,jobTitle, companyAddress, salaryMinRange, salaryMaxRange, experienceYear,jobDescription, email,jobType,city} = req.body
+        const{jobTitle, salaryMinRange, salaryMaxRange, 
+          experienceYear, jobDescription, userId, city, 
+          ageLimitMin, ageLimitMax, workingHours, overtime, education, 
+          drivingLicence, accommodation, transportation, food, specialTraining, 
+          specialSkill, specialNotes} = req.body
         const updateJob = await Job.findByIdAndUpdate(
             req.params.id,
-            {companyName,jobTitle, companyAddress, salaryMinRange, salaryMaxRange, experienceYear,jobDescription,email,jobType,city},
+            {jobTitle, salaryMinRange, salaryMaxRange, 
+              experienceYear, jobDescription, userId, city, 
+              ageLimitMin, ageLimitMax, workingHours, overtime, education, 
+              drivingLicence, accommodation, transportation, food, specialTraining, 
+              specialSkill, specialNotes},
             {new:true}
         );
         res.json(updateJob);

@@ -16,15 +16,18 @@ router.route('/').post((req,res)=>{
       });
 
       var mailOptions = {
-        from: process.env.EMAIL_USER, 
-        to: email, 
-        subject: `Contact Details ${name}`,
-        html: `<h1>Contact Details</h1>
-           <p> I am reaching out to contact on the availability of rental space</p>
-           <p><strong>Name:</strong> ${name}</p>
-           <p><strong>Email:</strong> ${email}</p>
-           <p><strong>Number:</strong> ${number}</p>
-           <p><strong>Message:</strong> ${message}</p>`
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_TO_USER,
+        subject: `Sai HR - Contact Request from ${name}`,
+        html: `<h1>Sai HR - Contact Request</h1>
+               <p>Hello,</p>
+               <p>You have received a new contact request.</p>
+               <p><strong>Name:</strong> ${name}</p>
+               <p><strong>Email:</strong> ${email}</p>
+               <p><strong>Phone Number:</strong> ${number}</p>
+               <p><strong>Message:</strong> ${message}</p>
+               <p>Best Regards,</p>
+               <p><strong>${name}</strong></p>`
     };
     
       transporter.sendMail(mailOptions, function(error, info){
